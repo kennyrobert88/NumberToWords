@@ -1,6 +1,6 @@
 # NumberToWords
 ## Java Library for converting Number to Words
-### How to use
+### Import Dependency
 ### Using Gradle
 #### Add to settings.gradle.kts
 <pre> 	
@@ -39,3 +39,10 @@
     &lt;version&gt;Tag&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
+
+### How to use?
+#### Initiate Class 
+<pre> var numberToWords = new NumberToWordsID(); </pre>
+#### Converting by Long or by Integer to String
+<pre> var result = numberToWords.convertToWords((Long) 10L); </pre>
+<pre> var result = numberToWords.convertToWords((Integer) 10); </pre>
