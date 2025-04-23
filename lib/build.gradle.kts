@@ -32,7 +32,7 @@ sonarqube {
 
         // Optional but recommended: use environment variable for security
         System.getenv("SONAR_TOKEN")?.let {
-            property("sonar.login", it)
+            property("sonar.token", it)
         }
     }
 }
