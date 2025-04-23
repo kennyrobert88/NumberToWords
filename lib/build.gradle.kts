@@ -32,7 +32,7 @@ sonar {
 
         // Optional but recommended: use environment variable for security
         System.getenv("SONAR_TOKEN")?.let {
-            property("sonar.login", it)
+            property("sonar.token", it)
         }
 
         property("sonar.exclusions", "**/generated/**, **/test/**, **/numberToWords/Constants")
