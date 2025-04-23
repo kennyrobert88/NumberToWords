@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 repositories {
@@ -21,6 +22,19 @@ dependencies {
     api("org.apache.commons:commons-math3:3.6.1")
     implementation("com.google.guava:guava:32.1.2-jre")
     implementation("org.apache.commons:commons-lang3:3.12.0")
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "your_project_key")
+        property("sonar.organization", "your_organization")
+        property("sonar.host.url", "https://sonarcloud.io")
+
+        // Optional but recommended: use environment variable for security
+        System.getenv("SONAR_TOKEN")?.let {
+            property("sonar.login", it)
+        }
+    }
 }
 
 testing {
