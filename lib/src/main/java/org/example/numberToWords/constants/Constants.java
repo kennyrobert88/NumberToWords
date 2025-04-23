@@ -1,4 +1,4 @@
-package org.example.numberToWords;
+package org.example.numberToWords.constants;
 
 public class Constants {
     public static final String[] BELOW_TWENTY_ID = {

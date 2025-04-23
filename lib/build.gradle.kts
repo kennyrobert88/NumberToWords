@@ -10,6 +10,7 @@ plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
     id("org.sonarqube") version "4.4.1.3373"
+    `jacoco`
 }
 
 repositories {
@@ -22,6 +23,7 @@ dependencies {
     api("org.apache.commons:commons-math3:3.6.1")
     implementation("com.google.guava:guava:32.1.2-jre")
     implementation("org.apache.commons:commons-lang3:3.12.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
 }
 
 sonar {
@@ -35,13 +37,22 @@ sonar {
             property("sonar.token", it)
         }
 
-        property("sonar.exclusions", "**/generated/**, **/test/**, **/numberToWords/Constants")
+        property("sonar.exclusions", "**/generated/**, **/test/**, **/constants/**")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
 
-testing {
-    suites.named<JvmTestSuite>("test") {
-        useJUnitJupiter("5.10.3")
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)  // Needed for SonarQube
+        csv.required.set(false)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
 }
 
