@@ -34,6 +34,8 @@ sonar {
         System.getenv("SONAR_TOKEN")?.let {
             property("sonar.login", it)
         }
+
+        property("sonar.exclusions", "**/generated/**, **/test/**, **/numberToWords/Constants")
     }
 }
 
