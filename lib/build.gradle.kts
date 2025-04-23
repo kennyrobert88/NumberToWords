@@ -26,8 +26,8 @@ dependencies {
 
 sonarqube {
     properties {
-        property("sonar.projectKey", "your_project_key")
-        property("sonar.organization", "your_organization")
+        property("sonar.projectKey", "kennyrobert88_NumberToWords")
+        property("sonar.organization", "krobert888")
         property("sonar.host.url", "https://sonarcloud.io")
 
         // Optional but recommended: use environment variable for security
