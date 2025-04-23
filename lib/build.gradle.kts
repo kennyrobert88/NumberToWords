@@ -11,6 +11,7 @@ plugins {
     `java-library`
     id("org.sonarqube") version "4.4.1.3373"
     `jacoco`
+    `maven-publish`
 }
 
 repositories {
@@ -60,5 +61,21 @@ tasks.jacocoTestReport {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+group = "com.github.kennyrobert88"
+version = System.getenv("RELEASE_VERSION") ?: "local-SNAPSHOT"
+
+
+// Publishing repo
+publishing {
+    publications {
+        create<MavenPublication>("gpr") {
+            from(components["java"])
+            groupId = group.toString()
+            artifactId = "NumberToWords"
+            version = version.toString()
+        }
     }
 }
