@@ -5,14 +5,23 @@ package org.example.numberToWords;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 public class NumberToWordsID implements NumberToWordsIDImpl {
 
     @Override
-    public String convertNumberToWords(long number) {
+    public String convertNumberToWords(Long number) {
         if (this.parameterConstraintChecker(number)) {
-
+            throw new IllegalArgumentException(Constants.OUT_OF_BOUND_EXCEPTION);
         }
-        return StringUtils.EMPTY;
+        return this.helperConvertNumberToWords(number);
+    }
+
+    @Override
+    public String convertNumberToWords(Integer number) {
+        return (!Objects.isNull(number))
+                ? convertNumberToWords(number.longValue())
+                : convertNumberToWords((Long) null);
     }
 
     /***
@@ -20,14 +29,52 @@ public class NumberToWordsID implements NumberToWordsIDImpl {
      * @param number
      * @return boolean of value in constraint
      ***/
-    private boolean parameterConstraintChecker(long number) {
-        return number >= Constants.MIN_VALUE && number <= Constants.MAX_VALUE;
+    private boolean parameterConstraintChecker(Long number) {
+        return Objects.isNull(number) || number < Constants.MIN_VALUE || number > Constants.MAX_VALUE;
     }
 
     /***
-     *
+     * helper method
      ***/
-    private String helperConvertNumberToWords() {
-        return StringUtils.EMPTY;
+    private String helperConvertNumberToWords(long number) {
+        StringBuilder result = new StringBuilder();
+        int index = 0;
+        if (number == 0) {
+            return Constants.ZERO_ID;
+        }
+        while (number != 0) {
+            int hundreds = (int) (number % 1000);
+            if (hundreds != 0) {
+                result.insert(
+                        0,
+                        this.recursion(hundreds)
+                                + Constants.SPACE
+                                + Constants.THOUSANDS_ID[index]
+                                + Constants.SPACE
+                );
+            }
+            index += 1;
+            number /= 1000;
+        }
+        return result.toString().trim().replaceAll("\\s+", Constants.SPACE);
+    }
+
+    private String recursion(int concatNumber) {
+        if (concatNumber == 0) {
+            return StringUtils.EMPTY;
+        } else if (concatNumber < 20) {
+            return Constants.BELOW_TWENTY_ID[concatNumber];
+        }  else if (concatNumber < 100) {
+            return Constants.TENS_ID[concatNumber / 10] +
+                    Constants.SPACE + this.recursion(concatNumber % 10);
+        }  else if (concatNumber < 200) {
+            return Constants.ONE_HUNDRED_ID + Constants.SPACE + this.recursion(concatNumber % 100);
+        } else {
+            return Constants.BELOW_TWENTY_ID[concatNumber / 100]
+                    + Constants.SPACE
+                    + Constants.HUNDRED_ID
+                    + Constants.SPACE
+                    + this.recursion(concatNumber % 100);
+        }
     }
 }
