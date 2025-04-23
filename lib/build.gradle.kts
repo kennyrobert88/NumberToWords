@@ -24,7 +24,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.12.0")
 }
 
-sonarqube {
+sonar {
     properties {
         property("sonar.projectKey", "kennyrobert88_NumberToWords")
         property("sonar.organization", "krobert888")
