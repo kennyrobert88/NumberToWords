@@ -46,3 +46,8 @@
 #### Converting by Long or by Integer to String
 <pre> var result = numberToWords.convertToWords((Long) 10L); </pre>
 <pre> var result = numberToWords.convertToWords((Integer) 10); </pre>
+
+### Tech Stack Used
+#### Programming Language: Java 17, Gradle:8.11.1
+#### Testing: JUnit, Jacoco coverage and SonarQube dashboard
+#### Pipeline: Github Actions
