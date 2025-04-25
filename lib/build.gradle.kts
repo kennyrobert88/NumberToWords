@@ -30,6 +30,7 @@ dependencies {
 sonar {
     properties {
         property("sonar.projectKey", "kennyrobert88_NumberToWords")
+        property("sonar.projectName", "NumberToWords")
         property("sonar.organization", "krobert888")
         property("sonar.host.url", "https://sonarcloud.io")
 
