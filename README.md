@@ -13,7 +13,7 @@
   }
 </pre>
 
-### Add the dependency
+#### Add the dependency
 <pre>
   dependencies {
       implementation("com.github.kennyrobert88:numberToWords:Tag")
