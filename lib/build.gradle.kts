@@ -40,7 +40,8 @@ sonar {
         }
 
         property("sonar.exclusions", "**/generated/**, **/test/**, **/constants/**")
-        property("sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+        property("sonar.gradle.skipCompile", "true")
+        property("sonar.coverage.jacoco.xmlReportPaths", layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml").get().asFile.path)
     }
 }
 
@@ -58,11 +59,12 @@ tasks.jacocoTestReport {
     }
 }
 
-// Apply a specific Java toolchain to ease working on different environments.
+// Configure Java source/target compatibility for JDK 17+.
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    withJavadocJar()
+    withSourcesJar()
 }
 
 group = "com.github.kennyrobert88"
