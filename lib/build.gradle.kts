@@ -34,12 +34,6 @@ sonar {
         property("sonar.projectName", "NumberToWords")
         property("sonar.organization", "krobert888")
         property("sonar.host.url", "https://sonarcloud.io")
-
-        // Optional but recommended: use environment variable for security
-        System.getenv("SONAR_TOKEN")?.let {
-            property("sonar.token", it)
-        }
-
         property("sonar.exclusions", "**/generated/**, **/test/**, **/constants/**")
         property("sonar.gradle.skipCompile", "true")
         property("sonar.coverage.jacoco.xmlReportPaths", layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml").get().asFile.path)
