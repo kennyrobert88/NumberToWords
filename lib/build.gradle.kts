@@ -9,7 +9,7 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
-    id("org.sonarqube") version "4.4.1.3373"
+    id("org.sonarqube") version "7.3.0.8198"
     `jacoco`
     `maven-publish`
 }
