@@ -189,7 +189,7 @@ JAVA_HOME=/path/to/jdk-21 ./gradlew test
 | Component              | Technology                            |
 |------------------------|---------------------------------------|
 | **Language**           | Java 17+                              |
-| **Build Tool**         | Gradle 8.11.1                         |
+| **Build Tool**         | Gradle 9.5.0                          |
 | **Testing**            | JUnit 5, JaCoCo                       |
 | **Code Quality**       | SonarCloud                            |
 | **CI/CD**              | GitHub Actions                        |
